@@ -1,0 +1,39 @@
+﻿<Window x:Class="LAB2_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAB2_3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="800">
+    <Grid>
+        <ListBox x:Name="list" Height="300" Width="220" HorizontalAlignment="Left" Background="LightGray">
+            <ListBoxItem>
+                <Button Content="Меркурий" Width="200" Height="26" FontSize="16" Click="Mer_Click"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="Венера" Width="200" Height="26" FontSize="16" Click="Ven_Click"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="Земля" Width="200" Height="26" FontSize="16" Click="Zem_Click"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="Марс" Width="200" Height="26" FontSize="16" Click="Mar_Click"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="Юпитер" Width="200" Height="26" FontSize="16" Click="Jup_Click"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="Сатурн" Width="200" Height="26" FontSize="16" Click="Sat_Click"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="Уран" Width="200" Height="26" FontSize="16" Click="Ur_Click"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="Нептун" Width="200" Height="26" FontSize="16" Click="Nep_Click"/>
+            </ListBoxItem>
+        </ListBox>
+        <TextBlock Width="570" Height="280" Background="LightGray" HorizontalAlignment="Left" Margin="230,10,10,10" TextWrapping="Wrap"/>
+        <TextBlock x:Name="txt" Text="" Height="235" Width="520"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,25,0" TextWrapping="Wrap" FontFamily="Times New Roman" FontSize="18"/>
+    </Grid>
+</Window>

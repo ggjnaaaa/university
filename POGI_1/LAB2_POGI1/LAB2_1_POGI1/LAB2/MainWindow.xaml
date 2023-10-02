@@ -1,0 +1,36 @@
+﻿<Window x:Class="LAB2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAB2"
+        mc:Ignorable="d"
+        Title="Lab2_1" Height="200" Width="400
+        ">
+    <Grid x:Name="MainRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="35*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="65*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="A" Grid.Column="0" Grid.Row="0" Text="A" Margin="0,18,10,4" TextAlignment="Right" FontSize="20" RenderTransformOrigin="0.623,-0.012"/>
+        <TextBlock x:Name="B" Grid.Column="0" Grid.Row="2" Text="B" Margin="0,18,10,7" TextAlignment="Right" FontSize="20"/>
+        <Label x:Name="outputRez" Grid.Column="5" FontSize="16" Background="LightGray" HorizontalAlignment="Center" Width="120" Margin="0,70,0,0" Content="" Grid.RowSpan="2"/>
+        <Label x:Name="rez" Grid.Column="4" Margin="0,70,0,0" Grid.RowSpan="2" Content="=" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox x:Name="enterA" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,18,0,17" FontSize="18" />
+        <TextBox x:Name="enterB" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,18,0,17" FontSize="18" />
+
+        <Button x:Name="plus" Grid.Column="0" Margin="0,70,0,0" Grid.RowSpan="2" Click="plus_Click">+</Button>
+        <Button x:Name="minus" Grid.Column="1" Margin="0,70,0,0" Grid.RowSpan="2" Click="minus_Click">-</Button>
+        <Button x:Name="umn" Grid.Column="2" Margin="0,70,0,0" Grid.RowSpan="2" Click="umn_Click">*</Button>
+        <Button x:Name="div" Grid.Column="3" Margin="0,70,0,0" Grid.RowSpan="2" Click="div_Click">/</Button>
+    </Grid>
+</Window>

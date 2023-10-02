@@ -1,0 +1,18 @@
+﻿<Window x:Class="LAB2_5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAB2_5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="File" Margin="10,5,0,0">
+                <MenuItem Header="Open file" Click="OF_Click" x:Name="OF"/>
+                <MenuItem Header="Save file" Click="S_Click"  x:Name="S"/>
+            </MenuItem>
+        </Menu>
+        <TextBox x:Name="txt" Background="LightGray" Height="390" Width="770" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,0" FontSize="18" Text=""/>
+    </Grid>
+</Window>

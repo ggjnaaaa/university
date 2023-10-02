@@ -1,0 +1,21 @@
+﻿<Window x:Class="KR.DelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KR"
+        mc:Ignorable="d"
+        Title="Удалить" Height="188" Width="263">
+    <Grid>
+        <Label Content="Категория товара:" Height="28" VerticalAlignment="Top" Margin="0,0,0,0"/>
+        <ComboBox x:Name="category" Margin="72,33,71,0" Height="22" VerticalAlignment="Top" SelectionChanged="category_SelectionChanged">
+            <ComboBoxItem Content="Холодильники"/>
+            <ComboBoxItem Content="Кондиционеры"/>
+            <ComboBoxItem Content="Стиральные машины"/>
+            <ComboBoxItem Content="Посудомоечные машины"/>
+        </ComboBox>
+        <Label Content="Введите штрих-код товара:" Height="28" VerticalAlignment="Top" Margin="0,58,0,0"/>
+        <TextBox x:Name="del" Width="120" Height="20" Margin="72,86,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsReadOnly="True"/>
+        <Button Content="Удалить" Width="80" Margin="92,120,0,0" Click="Button_Click" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+    </Grid>
+</Window>
