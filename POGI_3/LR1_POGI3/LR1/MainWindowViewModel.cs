@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -23,6 +17,9 @@ namespace LR1
         // Свойства (и переменные к ним) для биндинга оконных элементов
         public ObservableCollection<Line> Lines { get; set; }
         private Shape _selectedShape;
+        /// <summary>
+        /// Выделеная фигура
+        /// </summary>
         public Shape SelectedShape
         {
             get
@@ -36,6 +33,9 @@ namespace LR1
             }
         }
         private double _xSlider;
+        /// <summary>
+        /// Слайдер перемещения по X
+        /// </summary>
         public double XSlider
         {
             get { return _xSlider; }
@@ -50,6 +50,9 @@ namespace LR1
             }
         }
         private double _ySlider;
+        /// <summary>
+        /// Слайдер перемещения по Y
+        /// </summary>
         public double YSlider
         {
             get { return _ySlider; }
@@ -64,6 +67,9 @@ namespace LR1
             }
         }
         private double _lineSlider;
+        /// <summary>
+        /// Слайдер изменения толщины линии
+        /// </summary>
         public double LineSlider
         {
             get { return _lineSlider; }

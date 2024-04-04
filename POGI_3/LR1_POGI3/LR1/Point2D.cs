@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LR1
 {
@@ -14,8 +10,14 @@ namespace LR1
     internal class Point2D : INotifyPropertyChanged
     {
         public event EventHandler PointChaged;
+        /// <summary>
+        /// Индекс в массиве Point объекта Shape
+        /// </summary>
         public readonly int Index;
         private double _x;
+        /// <summary>
+        /// Положение точки по оси X
+        /// </summary>
         public double X
         {
             get
@@ -30,6 +32,9 @@ namespace LR1
             }
         }
         private double _y;
+        /// <summary>
+        /// Положение точки по оси Y
+        /// </summary>
         public double Y
         {
             get
@@ -46,6 +51,7 @@ namespace LR1
         private double lastSliderX;
         private double lastSliderY;
 
+        // Конструктор
         public Point2D(double x, double y, int index)
         {
             _x = x;

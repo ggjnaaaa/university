@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using LR1.shapes;
 
 namespace LR1
@@ -12,12 +11,12 @@ namespace LR1
     /// </summary>
     internal class ShapesCreator : INotifyPropertyChanged
     {
-        private Random random;
+        private Random _random;
 
         // Конструктор
         public ShapesCreator()
         {
-            random = new Random();
+            _random = new Random();
         }
 
         /// <summary>
@@ -80,7 +79,7 @@ namespace LR1
         /// </summary>
         /// <returns>Возвращает созданную точку</returns>
         private Point2D generateRandomPoint(int index) => new Point2D(generateNextRandomNumber(maxHorizontalPointValue()), generateNextRandomNumber(maxVerticalPointValue()), index);
-        private double generateNextRandomNumber(double maxValue) => (random.NextDouble() + random.Next((int)maxValue));
+        private double generateNextRandomNumber(double maxValue) => (_random.NextDouble() + _random.Next((int)maxValue));
         private double maxVerticalPointValue() => Application.Current.MainWindow.Height - 180 - 34;
         private double maxHorizontalPointValue() => Application.Current.MainWindow.Width - 262 - 34;
 
