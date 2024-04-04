@@ -1,0 +1,70 @@
+﻿<Window x:Class="LR1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LR1"
+        mc:Ignorable="d"
+        Title="Лабораторная работа 1. Анастасия Г." Height="500" Width="800"
+        MinHeight="500" MinWidth="800"
+        FontFamily="Arial" FontSize="18">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Height" Value="50"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Canvas x:Name="backgroundCanvas" Background="Black" Margin="34, 180, 262, 34" IsEnabled="false"/>
+        <Canvas x:Name="drawerCanvas" Background="#FFEAEAEA" ClipToBounds="True" Margin="34, 180, 262, 34" Width="Auto" Height="Auto">
+            <ItemsControl ItemsSource="{Binding Lines}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}"
+                  Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
+
+        <Button Command="{Binding squareClick}"
+                Margin="0,0,35,35" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <TextBlock Text="Квадрат"/>
+        </Button>
+        <Button Command="{Binding randomRectangleClick}"
+                Margin="0,0,35,105" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <TextBlock Text="Произвольный прямоугольник"/>
+        </Button>
+        <Button Command="{Binding randomTriangleClick}"
+                Margin="0,0,35,175" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <TextBlock Text="Произвольный треугольник"/>
+        </Button>
+
+        <TextBlock x:Name="shapeInfo" Text="{Binding SelectedShape.AllInfo, FallbackValue='Выберите фигуру чтобы увидеть всю информацию'}"
+                   FontSize="16" TextAlignment="Left"
+                   Height="120" Margin="35,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+
+        <TextBlock Text="Cмещение по X:" Margin="0,0,74,389" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider x:Name="xSlider" HorizontalAlignment="Right" Margin="0,0,35,371" VerticalAlignment="Bottom" Width="180"
+                Value="{Binding XSlider}" Minimum="-500" Maximum="500"  IsEnabled="True"/>
+        <TextBlock Text="Cмещение по Y:" Margin="0,0,74,333" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider x:Name="ySlider" HorizontalAlignment="Right" Margin="0,0,35,315" Width="180" Height="18" VerticalAlignment="Bottom"
+                Value="{Binding YSlider}" Minimum="-500" Maximum="500"  IsEnabled="True"/>
+        <TextBlock Text="Толщина линии:" Margin="0,0,74,268" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider x:Name="lineSlider" HorizontalAlignment="Right" Margin="0,0,35,245" Width="180" Height="18" VerticalAlignment="Bottom"
+        Value="{Binding LineSlider}" Minimum="1" Maximum="10" />
+
+    </Grid>
+</Window>
