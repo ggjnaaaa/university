@@ -17,16 +17,16 @@ namespace LR1
         protected readonly Drawer drawer;
 
         // Поля/свойства информации о фигуре.
-        private double _lineThikness;
+        private double _lineThickness;
         /// <summary>
         /// Толщина линии (также при изменении меняет толщину у всех линий внутри себя)
         /// </summary>
         internal double LineThickness
         {
-            get { return _lineThikness; }
+            get { return _lineThickness; }
             set
             {
-                _lineThikness = value;
+                _lineThickness = value;
                 if (Lines != null)
                     foreach (DecoratedLine line in Lines) line.Thickness = value;
             }
@@ -46,8 +46,8 @@ namespace LR1
         }
         // Возвращает всю информацию о фигуре, используется для биндинга текста с информацией
         public string AllInfo { get => getAllInfo(); }
-        protected internal List<Point2D> Points { get; protected set; }
-        public List<DecoratedLine> Lines { get; set; }
+        public List<Point2D> Points { get; protected set; }
+        internal List<DecoratedLine> Lines { get; set; }
 
         protected Shape(List<Point2D> points)
         {

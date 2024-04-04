@@ -23,9 +23,9 @@ namespace LR1.shapes
         public override double getPerimeter() => (Lines[0].length() + Lines[1].length() + Lines[2].length());
         protected override string getAllInfo()
         {
-            object[] result = new object[] { Points[0].getX(), Points[0].getY(),
-                                            Points[1].getX(), Points[1].getY(),
-                                            Points[2].getX(), Points[2].getY(),
+            object[] result = new object[] { Points[0].X, Points[0].Y,
+                                            Points[1].X, Points[1].Y,
+                                            Points[2].X, Points[2].Y,
                                             getArea(), getPerimeter()};
 
             for (int i = 0; i < 8; i++)

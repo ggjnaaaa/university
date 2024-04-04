@@ -41,6 +41,8 @@ namespace LR1
             Line.Stroke = Brushes.Red;
             Line.MouseLeftButtonDown += LineClickedHandler;
             Thickness = parentShape.LineThickness;
+            p1.PointChaged += PointUpdate;
+            p2.PointChaged += PointUpdate;
             updatePoints(p1, p2);
         }
 
@@ -66,9 +68,14 @@ namespace LR1
         /// <param name="to">Конечная точка линии</param>
         public void updatePoints(Point2D from, Point2D to)
         {
-            Line.X1 = from.getX(); Line.Y1 = from.getY(); Line.X2 = to.getX(); Line.Y2 = to.getY();
+            Line.X1 = from.X; Line.Y1 = from.Y; Line.X2 = to.X; Line.Y2 = to.Y;
             Point1 = from;
             Point2 = to;
+        }
+
+        private void PointUpdate(object sender, EventArgs args)
+        {
+            updatePoints(Point1, Point2);
         }
 
         private void LineClickedHandler(object sender, MouseButtonEventArgs e)

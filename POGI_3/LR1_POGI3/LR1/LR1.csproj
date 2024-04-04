@@ -59,6 +59,7 @@
     <Compile Include="Drawer.cs" />
     <Compile Include="DecoratedLine.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="PointIndexConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ShapesCreator.cs" />
     <Compile Include="shapes\Rectangle.cs" />

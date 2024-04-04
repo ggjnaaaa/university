@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,31 +11,50 @@ namespace LR1
     /// <summary>
     /// Класс для двумерной точки
     /// </summary>
-    internal class Point2D
+    internal class Point2D : INotifyPropertyChanged
     {
-        private double x;
-        private double y;
+        public event EventHandler PointChaged;
+        public readonly int Index;
+        private double _x;
+        public double X
+        {
+            get
+            {
+                return _x;
+            }
+            set
+            {
+                _x = value;
+                OnPropertyChanged(nameof(X));
+                PointChaged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        private double _y;
+        public double Y
+        {
+            get
+            {
+                return _y;
+            }
+            set
+            {
+                _y = value;
+                OnPropertyChanged(nameof(Y));
+                PointChaged?.Invoke(this, EventArgs.Empty);
+            }
+        }
         private double lastSliderX;
         private double lastSliderY;
 
-        public Point2D(double x, double y)
+        public Point2D(double x, double y, int index)
         {
-            this.x = x;
-            this.y = y;
+            _x = x;
+            _y = y;
             lastSliderX = 0;
             lastSliderY = 0;
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Возвращает положение точки по X</returns>
-        public double getX() => x;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Возвращает положение точки по Y</returns>
-        public double getY() => y;
+            Index = index;
+        }
 
         /// <summary>
         /// Сдвигает точку согласно значению слайдера.
@@ -42,8 +63,8 @@ namespace LR1
         /// <param name="shiftY">Сдвиг по Y</param>
         public void shiftSlider(double shiftX, double shiftY)
         {
-            x = shiftX == 0 ? x : x + shiftX - lastSliderX;
-            y = shiftY == 0 ? y : y + shiftY - lastSliderY;
+            X = shiftX == 0 ? X : X + shiftX - lastSliderX;
+            Y = shiftY == 0 ? Y : Y + shiftY - lastSliderY;
             lastSliderX = shiftX == 0 ? lastSliderX : shiftX;
             lastSliderY = shiftY == 0 ? lastSliderY : shiftY;
         }
@@ -53,6 +74,12 @@ namespace LR1
         /// </summary>
         /// <param name="point"></param>
         /// <returns>Возвращает расстояние между точками.</returns>
-        public double getDistance(Point2D point) => Math.Sqrt(Math.Pow(x - point.x, 2) + Math.Pow(y - point.y, 2));
+        public double getDistance(Point2D point) => Math.Sqrt(Math.Pow(X - point.X, 2) + Math.Pow(Y - point.Y, 2));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

@@ -91,7 +91,7 @@ namespace LR1
         // Конструктор
         public MainWindowViewModel()
         {
-            randomTriangleClick = new RelayCommand(param => addLines(subscribeShape(shapeCreator.createTriange())));
+            randomTriangleClick = new RelayCommand(param => addLines(subscribeShape(shapeCreator.createTriangle())));
             randomRectangleClick = new RelayCommand(param => addLines(subscribeShape(shapeCreator.createRectangle())));
             squareClick = new RelayCommand(param => addLines(subscribeShape(shapeCreator.createSquare())));
 

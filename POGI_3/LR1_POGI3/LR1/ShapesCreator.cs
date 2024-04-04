@@ -24,17 +24,17 @@ namespace LR1
         /// Создаёт треугольник по рандомным точкам.
         /// </summary>
         /// <returns>Возвращает созданный треугольник.</returns>
-        public Shape createTriange()
+        public Shape createTriangle()
         {
-            Point2D p1 = generateRandomPoint();
-            Point2D p2 = generateRandomPoint();
-            Point2D p3 = generateRandomPoint();
+            Point2D p1 = generateRandomPoint(0);
+            Point2D p2 = generateRandomPoint(1);
+            Point2D p3 = generateRandomPoint(2);
 
             while(true)
             {
-                if (((p3.getX() - p1.getX()) / (p2.getX() - p1.getX())) == ((p3.getY() - p1.getY()) / (p2.getY() - p1.getY())) && ((p3.getX() - p1.getX()) / (p2.getX() - p1.getX()) > 0))
+                if (((p3.X - p1.X) / (p2.X - p1.X)) == ((p3.Y - p1.Y) / (p2.Y - p1.Y)) && ((p3.X - p1.X) / (p2.X - p1.X) > 0))
                 {
-                    p3 = generateRandomPoint();
+                    p3 = generateRandomPoint(2);
                 }
                 else break;
             }
@@ -49,10 +49,10 @@ namespace LR1
         /// <returns>Возвращает созданный прямоугольник.</returns>
         public Shape createRectangle()
         {
-            Point2D p1 = generateRandomPoint();
-            Point2D p2 = new Point2D(generateNextRandomNumber(250), p1.getY());
-            Point2D p3 = new Point2D(p2.getX(), generateNextRandomNumber(250));
-            Point2D p4 = new Point2D(p1.getX(), p3.getY());
+            Point2D p1 = generateRandomPoint(0);
+            Point2D p2 = new Point2D(generateNextRandomNumber(250), p1.Y, 1);
+            Point2D p3 = new Point2D(p2.X, generateNextRandomNumber(250), 2);
+            Point2D p4 = new Point2D(p1.X, p3.Y, 3);
 
             Shape shape = new Rectangle(p1, p2, p3, p4);
             return shape;
@@ -66,10 +66,10 @@ namespace LR1
         {
             double size = generateNextRandomNumber(maxHorizontalPointValue() / 2);
 
-            Point2D p1 = generateRandomPoint();
-            Point2D p2 = new Point2D(p1.getX() + size, p1.getY());
-            Point2D p3 = new Point2D(p2.getX(), p2.getY() + size);
-            Point2D p4 = new Point2D(p1.getX(), p3.getY());
+            Point2D p1 = generateRandomPoint(0);
+            Point2D p2 = new Point2D(p1.X + size, p1.Y, 1);
+            Point2D p3 = new Point2D(p2.X, p2.Y + size, 2);
+            Point2D p4 = new Point2D(p1.X, p3.Y, 3);
 
             Shape shape = new Rectangle(p1, p2, p3, p4);
             return shape;
@@ -79,7 +79,7 @@ namespace LR1
         /// Генерирует рандомную точку.
         /// </summary>
         /// <returns>Возвращает созданную точку</returns>
-        private Point2D generateRandomPoint() => new Point2D(generateNextRandomNumber(maxHorizontalPointValue()), generateNextRandomNumber(maxVerticalPointValue()));
+        private Point2D generateRandomPoint(int index) => new Point2D(generateNextRandomNumber(maxHorizontalPointValue()), generateNextRandomNumber(maxVerticalPointValue()), index);
         private double generateNextRandomNumber(double maxValue) => (random.NextDouble() + random.Next((int)maxValue));
         private double maxVerticalPointValue() => Application.Current.MainWindow.Height - 180 - 34;
         private double maxHorizontalPointValue() => Application.Current.MainWindow.Width - 262 - 34;

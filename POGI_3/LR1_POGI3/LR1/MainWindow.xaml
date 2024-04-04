@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LR1"
         mc:Ignorable="d"
-        Title="Лабораторная работа 1. Анастасия Г." Height="500" Width="800"
+        Title="Лабораторная работа 1. Анастасия Г." Height="550" Width="800"
         MinHeight="500" MinWidth="800"
         FontFamily="Arial" FontSize="18">
     <Window.Resources>
@@ -17,13 +17,14 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
+        <local:PointIndexConverter x:Key="PointIndexConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Canvas x:Name="backgroundCanvas" Background="Black" Margin="34, 180, 262, 34" IsEnabled="false"/>
-        <Canvas x:Name="drawerCanvas" Background="#FFEAEAEA" ClipToBounds="True" Margin="34, 180, 262, 34" Width="Auto" Height="Auto">
+        <Canvas x:Name="backgroundCanvas" Background="Black" Margin="34, 180, 262, 84" IsEnabled="false"/>
+        <Canvas x:Name="drawerCanvas" Background="#FFEAEAEA" ClipToBounds="True" Margin="35, 181, 263, 85" Width="Auto" Height="Auto">
             <ItemsControl ItemsSource="{Binding Lines}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -40,15 +41,15 @@
         </Canvas>
 
         <Button Command="{Binding squareClick}"
-                Margin="0,0,35,35" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                Margin="0,0,35,85" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <TextBlock Text="Квадрат"/>
         </Button>
         <Button Command="{Binding randomRectangleClick}"
-                Margin="0,0,35,105" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                Margin="0,0,35,155" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <TextBlock Text="Произвольный прямоугольник"/>
         </Button>
         <Button Command="{Binding randomTriangleClick}"
-                Margin="0,0,35,175" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                Margin="0,0,35,225" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <TextBlock Text="Произвольный треугольник"/>
         </Button>
 
@@ -56,15 +57,52 @@
                    FontSize="16" TextAlignment="Left"
                    Height="120" Margin="35,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
 
-        <TextBlock Text="Cмещение по X:" Margin="0,0,74,389" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
-        <Slider x:Name="xSlider" HorizontalAlignment="Right" Margin="0,0,35,371" VerticalAlignment="Bottom" Width="180"
+        <TextBlock Text="Cмещение по X:" Margin="0,0,74,439" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider x:Name="xSlider" HorizontalAlignment="Right" Margin="0,0,35,421" VerticalAlignment="Bottom" Width="180"
                 Value="{Binding XSlider}" Minimum="-500" Maximum="500"  IsEnabled="True"/>
-        <TextBlock Text="Cмещение по Y:" Margin="0,0,74,333" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
-        <Slider x:Name="ySlider" HorizontalAlignment="Right" Margin="0,0,35,315" Width="180" Height="18" VerticalAlignment="Bottom"
+        <TextBlock Text="Cмещение по Y:" Margin="0,0,74,383" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider x:Name="ySlider" HorizontalAlignment="Right" Margin="0,0,35,365" Width="180" Height="18" VerticalAlignment="Bottom"
                 Value="{Binding YSlider}" Minimum="-500" Maximum="500"  IsEnabled="True"/>
-        <TextBlock Text="Толщина линии:" Margin="0,0,74,268" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
-        <Slider x:Name="lineSlider" HorizontalAlignment="Right" Margin="0,0,35,245" Width="180" Height="18" VerticalAlignment="Bottom"
+        <TextBlock Text="Толщина линии:" Margin="0,0,74,318" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider x:Name="lineSlider" HorizontalAlignment="Right" Margin="0,0,35,295" Width="180" Height="18" VerticalAlignment="Bottom"
         Value="{Binding LineSlider}" Minimum="1" Maximum="10" />
+
+        <Grid Margin="34,0,34,19" Height="52" VerticalAlignment="Bottom" Background="Black"/>
+        <Grid Margin="35,0,35,20" Height="50" VerticalAlignment="Bottom" Background="LightGray">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding SelectedShape.Points}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Converter={StaticResource PointIndexConverter}}" />
+                                <TextBlock Text=": x = " />
+                                <TextBox Text="{Binding X}" Width="50"/>
+                                <TextBlock Text=" y = " />
+                                <TextBox Text="{Binding Y}" Width="50"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <!--<ItemsControl ItemsSource="{Binding SelectedShape.Lines}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="p1: x = " />
+                                <TextBox Text="{Binding Point1.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                <TextBlock Text=" y = " />
+                                <TextBox Text="{Binding Point1.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                <TextBlock Text=", " />
+                                <TextBlock Text="p2: x = " />
+                                <TextBox Text="{Binding Point2.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                <TextBlock Text=" y = " />
+                                <TextBox Text="{Binding Point2.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>-->
+            </ScrollViewer>
+            
+        </Grid>
 
     </Grid>
 </Window>
