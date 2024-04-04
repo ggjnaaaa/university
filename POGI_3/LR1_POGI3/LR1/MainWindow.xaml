@@ -76,30 +76,13 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Converter={StaticResource PointIndexConverter}}" />
                                 <TextBlock Text=": x = " />
-                                <TextBox Text="{Binding X}" Width="50"/>
+                                <TextBox Text="{Binding X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                 <TextBlock Text=" y = " />
-                                <TextBox Text="{Binding Y}" Width="50"/>
+                                <TextBox Text="{Binding Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <!--<ItemsControl ItemsSource="{Binding SelectedShape.Lines}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="p1: x = " />
-                                <TextBox Text="{Binding Point1.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                                <TextBlock Text=" y = " />
-                                <TextBox Text="{Binding Point1.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                                <TextBlock Text=", " />
-                                <TextBlock Text="p2: x = " />
-                                <TextBox Text="{Binding Point2.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                                <TextBlock Text=" y = " />
-                                <TextBox Text="{Binding Point2.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>-->
             </ScrollViewer>
             
         </Grid>
