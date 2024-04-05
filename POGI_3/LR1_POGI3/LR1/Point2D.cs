@@ -9,7 +9,7 @@ namespace LR1
     /// </summary>
     internal class Point2D : INotifyPropertyChanged
     {
-        public event EventHandler PointChaged;
+        public event EventHandler PointChanged;
         /// <summary>
         /// Индекс в массиве Point объекта Shape
         /// </summary>
@@ -28,7 +28,7 @@ namespace LR1
             {
                 _x = value;
                 OnPropertyChanged(nameof(X));
-                PointChaged?.Invoke(this, EventArgs.Empty);
+                PointChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private double _y;
@@ -45,7 +45,7 @@ namespace LR1
             {
                 _y = value;
                 OnPropertyChanged(nameof(Y));
-                PointChaged?.Invoke(this, EventArgs.Empty);
+                PointChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private double lastSliderX;

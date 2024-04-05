@@ -36,8 +36,8 @@ namespace LR1
             Line.Stroke = Brushes.Red;
             Line.MouseLeftButtonDown += LineClickedHandler;
             Thickness = parentShape.LineThickness;
-            p1.PointChaged += PointUpdate;
-            p2.PointChaged += PointUpdate;
+            p1.PointChanged += PointUpdate;
+            p2.PointChanged += PointUpdate;
             updatePoints(p1, p2);
         }
 

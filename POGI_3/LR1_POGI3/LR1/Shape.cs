@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
 namespace LR1
@@ -7,7 +9,7 @@ namespace LR1
     /// <summary>
     /// Абстрактный класс для фигуры
     /// </summary>
-    internal abstract class Shape
+    internal abstract class Shape : INotifyPropertyChanged
     {
         public event EventHandler ShapeClicked;
         protected readonly Drawer drawer;
@@ -41,7 +43,17 @@ namespace LR1
             }
         }
         // Возвращает всю информацию о фигуре, используется для биндинга текста с информацией
-        public string AllInfo { get => getAllInfo(); }
+        public string AllInfo
+        {
+            get
+            {
+                return getAllInfo();
+            }
+            private set
+            {
+                OnPropertyChanged(nameof(AllInfo));
+            }
+        }
         public List<Point2D> Points { get; protected set; }
         internal List<DecoratedLine> Lines { get; set; }
 
@@ -52,6 +64,7 @@ namespace LR1
             LineThickness = 3;
 
             Lines= new List<DecoratedLine>();
+            foreach (Point2D point in points) point.PointChanged += updateInfo;
             drawShape();
         }
 
@@ -80,6 +93,8 @@ namespace LR1
         /// </summary>
         /// <returns>Возвращает площадь</returns>
         public abstract double getArea();
+
+        private void updateInfo(object sender, EventArgs args) => AllInfo = "";
         /// <summary>
         /// 
         /// </summary>
@@ -90,6 +105,12 @@ namespace LR1
         {
             Color = Brushes.Blue;
             ShapeClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
