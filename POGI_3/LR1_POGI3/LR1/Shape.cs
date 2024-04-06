@@ -11,8 +11,8 @@ namespace LR1
     /// </summary>
     internal abstract class Shape : INotifyPropertyChanged
     {
-        public event EventHandler ShapeClicked;
-        protected readonly Drawer drawer;
+        public event EventHandler ShapeClick;
+        protected readonly Drawer Drawer;
 
         // Поля/свойства информации о фигуре.
         private double _lineThickness;
@@ -21,12 +21,12 @@ namespace LR1
         /// </summary>
         internal double LineThickness
         {
-            get { return _lineThickness; }
+            get => _lineThickness;
             set
             {
                 _lineThickness = value;
                 if (Lines != null)
-                    foreach (DecoratedLine line in Lines) line.Thickness = value;
+                    foreach (var line in Lines) line.Thickness = value;
             }
         }
         private Brush _color;
@@ -35,24 +35,19 @@ namespace LR1
         /// </summary>
         internal Brush Color
         {
-            get { return _color; }
+            get => _color;
             set
             {
                 _color = value;
-                foreach (DecoratedLine line in Lines) line.changeColor(value);
+                if (Lines != null)
+                    foreach (var line in Lines) line.ChangeColor(value);
             }
         }
         // Возвращает всю информацию о фигуре, используется для биндинга текста с информацией
         public string AllInfo
         {
-            get
-            {
-                return getAllInfo();
-            }
-            private set
-            {
-                OnPropertyChanged(nameof(AllInfo));
-            }
+            get => GetAllInfo();
+            private set => OnPropertyChanged();
         }
         public List<Point2D> Points { get; protected set; }
         internal List<DecoratedLine> Lines { get; set; }
@@ -60,57 +55,72 @@ namespace LR1
         protected Shape(List<Point2D> points)
         {
             Points = points;
-            drawer = new Drawer();
+            Drawer = new Drawer();
             LineThickness = 3;
 
-            Lines= new List<DecoratedLine>();
-            foreach (Point2D point in points) point.PointChanged += updateInfo;
-            drawShape();
+            Lines= new List<DecoratedLine>(); 
+            foreach (var point in points) point.PointChanged += UpdateInfo;
+            DrawShape();
         }
 
         /// <summary>
         /// Рисует/перерисовывает фигуру
         /// </summary>
-        public void drawShape() => drawer.drawShape(this);
+        public void DrawShape() => Drawer.DrawShape(this);
         /// <summary>
         /// Смещает фигуру по слайдерам
         /// </summary>
         /// <param name="shiftX"></param>
         /// <param name="shiftY"></param>
-        public void shiftSlider(double shiftX, double shiftY)
+        public void ShiftSlider(double shiftX, double shiftY)
         {
-            foreach (Point2D pt in Points) pt.shiftSlider(shiftX, shiftY);
-            drawShape();
+            foreach (var pt in Points) pt.ShiftSlider(shiftX, shiftY);
+            DrawShape();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns>Возвращает периметр</returns>
-        public abstract double getPerimeter();
+        public double GetPerimeter()
+        {
+            double result = 0;
+            foreach (var line in Lines)
+                result += line.Length();
+            return result;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns>Возвращает площадь</returns>
-        public abstract double getArea();
+        public double GetArea()
+        {
+            double area = 0;
 
-        private void updateInfo(object sender, EventArgs args) => AllInfo = "";
+            for (var i = 0; i < Points.Count; i++)
+            {
+                var j = (i + 1) % Points.Count;
+                area += Points[i].X * Points[j].Y - Points[j].X * Points[i].Y;
+            }
+
+            return Math.Abs(area / 2);
+        }
+
+        private void UpdateInfo(object sender, EventArgs args) => AllInfo = "";
         /// <summary>
         /// 
         /// </summary>
         /// <returns>Возвращает всю информацию о фигуре</returns>
-        protected abstract string getAllInfo();
+        protected abstract string GetAllInfo();
 
-        internal void shapeClicked(object sender, EventArgs e)
+        internal void ShapeClicked(object sender, EventArgs e)
         {
             Color = Brushes.Blue;
-            ShapeClicked?.Invoke(this, EventArgs.Empty);
+            ShapeClick?.Invoke(this, EventArgs.Empty);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
+        public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

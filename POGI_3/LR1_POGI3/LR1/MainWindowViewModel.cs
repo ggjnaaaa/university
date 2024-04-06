@@ -12,8 +12,6 @@ namespace LR1
     /// </summary>
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        public ShapesCreator shapeCreator;
-
         // Свойства (и переменные к ним) для биндинга оконных элементов
         public ObservableCollection<Line> Lines { get; set; }
         private Shape _selectedShape;
@@ -22,14 +20,11 @@ namespace LR1
         /// </summary>
         public Shape SelectedShape
         {
-            get
-            {
-                return _selectedShape;
-            }
+            get => _selectedShape;
             private set
             {
                 _selectedShape = value;
-                OnPropertyChanged(nameof(SelectedShape));
+                OnPropertyChanged();
             }
         }
         private double _xSlider;
@@ -38,15 +33,13 @@ namespace LR1
         /// </summary>
         public double XSlider
         {
-            get { return _xSlider; }
+            get => _xSlider;
             set
             {
-                if (SelectedShape != null)
-                {
-                    _xSlider = value;
-                    SelectedShape.shiftSlider(value, 0);
-                    OnPropertyChanged(nameof(XSlider));
-                }
+                if (SelectedShape == null) return;
+                _xSlider = value;
+                SelectedShape.ShiftSlider(value, 0);
+                OnPropertyChanged();
             }
         }
         private double _ySlider;
@@ -55,15 +48,13 @@ namespace LR1
         /// </summary>
         public double YSlider
         {
-            get { return _ySlider; }
+            get => _ySlider;
             set
             {
-                if (SelectedShape != null)
-                {
-                    _ySlider = value;
-                    SelectedShape.shiftSlider(0, value);
-                    OnPropertyChanged(nameof(YSlider));
-                }
+                if (SelectedShape == null) return;
+                _ySlider = value;
+                SelectedShape.ShiftSlider(0, value);
+                OnPropertyChanged();
             }
         }
         private double _lineSlider;
@@ -72,38 +63,38 @@ namespace LR1
         /// </summary>
         public double LineSlider
         {
-            get { return _lineSlider; }
+            get => _lineSlider;
             set
             {
                 if (SelectedShape != null)
                 {
                     _lineSlider = value;
                     SelectedShape.LineThickness = _lineSlider;
-                    OnPropertyChanged(nameof(LineSlider));
+                    OnPropertyChanged();
                 }
                 else
                 {
                     _lineSlider = 3;
-                    OnPropertyChanged(nameof(LineSlider));
+                    OnPropertyChanged();
                 }
             }
         }
 
         // Команды для кнопок
-        public RelayCommand randomTriangleClick {  get; private set; }
-        public RelayCommand randomRectangleClick { get; private set; }
-        public RelayCommand squareClick { get; private set; }
+        public RelayCommand RandomTriangleClick {  get; private set; }
+        public RelayCommand RandomRectangleClick { get; private set; }
+        public RelayCommand SquareClick { get; private set; }
 
         // Конструктор
         public MainWindowViewModel()
         {
-            randomTriangleClick = new RelayCommand(param => addLines(subscribeShape(shapeCreator.createTriangle())));
-            randomRectangleClick = new RelayCommand(param => addLines(subscribeShape(shapeCreator.createRectangle())));
-            squareClick = new RelayCommand(param => addLines(subscribeShape(shapeCreator.createSquare())));
-
-            shapeCreator = new ShapesCreator();
             Lines = new ObservableCollection<Line>();
-            resetSliders(0, 0, 3);
+
+            RandomTriangleClick = new RelayCommand(param => AddLines(SubscribeShape(ShapesCreator.CreateTriangle())));
+            RandomRectangleClick = new RelayCommand(param => AddLines(SubscribeShape(ShapesCreator.CreateRectangle())));
+            SquareClick = new RelayCommand(param => AddLines(SubscribeShape(ShapesCreator.CreateSquare())));
+
+            ResetSliders(0, 0, 3);
         }
 
         /// <summary>
@@ -111,9 +102,9 @@ namespace LR1
         /// </summary>
         /// <param name="shape">Фигура для подписки</param>
         /// <returns>Возвращает фигуру на которую была сделана подписка</returns>
-        private Shape subscribeShape(Shape shape)
+        private Shape SubscribeShape(Shape shape)
         {
-            shape.ShapeClicked += newSelectedShape;
+            shape.ShapeClick += NewSelectedShape;
             return shape;
         }
 
@@ -121,12 +112,10 @@ namespace LR1
         /// Добавление линий в коллекцию.
         /// </summary>
         /// <param name="shape">Источник линий</param>
-        private void addLines(Shape shape)
+        private void AddLines(Shape shape)
         {
-            foreach (DecoratedLine dLine in shape.Lines)
-            {
+            foreach (var dLine in shape.Lines)
                 Lines.Add(dLine.Line);
-            }
         }
 
         /// <summary>
@@ -135,13 +124,13 @@ namespace LR1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void newSelectedShape(object sender, EventArgs e)
+        private void NewSelectedShape(object sender, EventArgs e)
         {
             if (SelectedShape != null) SelectedShape.Color = Brushes.Red;
             SelectedShape = (Shape)sender;
             SelectedShape.Color = Brushes.Blue;
 
-            resetSliders(0, 0, SelectedShape.LineThickness);
+            ResetSliders(0, 0, SelectedShape.LineThickness);
         }
 
         /// <summary>
@@ -150,7 +139,7 @@ namespace LR1
         /// <param name="xValue">Новое значение для X слайдера</param>
         /// <param name="yValue">Новое значение для Y слайдера</param>
         /// <param name="lineValue">Новое значение для слайдера линии</param>
-        private void resetSliders(int xValue, int yValue, double lineValue)
+        private void ResetSliders(int xValue, int yValue, double lineValue)
         {
             YSlider = yValue;
             XSlider = xValue;
@@ -158,9 +147,6 @@ namespace LR1
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
+        public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

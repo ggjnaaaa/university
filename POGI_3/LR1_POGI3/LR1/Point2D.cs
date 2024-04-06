@@ -20,14 +20,11 @@ namespace LR1
         /// </summary>
         public double X
         {
-            get
-            {
-                return _x;
-            }
+            get => _x;
             set
             {
                 _x = value;
-                OnPropertyChanged(nameof(X));
+                OnPropertyChanged();
                 PointChanged?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -37,27 +34,24 @@ namespace LR1
         /// </summary>
         public double Y
         {
-            get
-            {
-                return _y;
-            }
+            get => _y;
             set
             {
                 _y = value;
-                OnPropertyChanged(nameof(Y));
+                OnPropertyChanged();
                 PointChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-        private double lastSliderX;
-        private double lastSliderY;
+        private double _lastSliderX;
+        private double _lastSliderY;
 
         // Конструктор
         public Point2D(double x, double y, int index)
         {
             _x = x;
             _y = y;
-            lastSliderX = 0;
-            lastSliderY = 0;
+            _lastSliderX = 0;
+            _lastSliderY = 0;
 
             Index = index;
         }
@@ -67,12 +61,12 @@ namespace LR1
         /// </summary>
         /// <param name="shiftX">Сдвиг по X</param>
         /// <param name="shiftY">Сдвиг по Y</param>
-        public void shiftSlider(double shiftX, double shiftY)
+        public void ShiftSlider(double shiftX, double shiftY)
         {
-            X = shiftX == 0 ? X : X + shiftX - lastSliderX;
-            Y = shiftY == 0 ? Y : Y + shiftY - lastSliderY;
-            lastSliderX = shiftX == 0 ? lastSliderX : shiftX;
-            lastSliderY = shiftY == 0 ? lastSliderY : shiftY;
+            X = shiftX == 0 ? X : X + shiftX - _lastSliderX;
+            Y = shiftY == 0 ? Y : Y + shiftY - _lastSliderY;
+            _lastSliderX = shiftX == 0 ? _lastSliderX : shiftX;
+            _lastSliderY = shiftY == 0 ? _lastSliderY : shiftY;
         }
 
         /// <summary>
@@ -80,12 +74,9 @@ namespace LR1
         /// </summary>
         /// <param name="point"></param>
         /// <returns>Возвращает расстояние между точками.</returns>
-        public double getDistance(Point2D point) => Math.Sqrt(Math.Pow(X - point.X, 2) + Math.Pow(Y - point.Y, 2));
+        public double GetDistance(Point2D point) => Math.Sqrt(Math.Pow(X - point.X, 2) + Math.Pow(Y - point.Y, 2));
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
+        public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

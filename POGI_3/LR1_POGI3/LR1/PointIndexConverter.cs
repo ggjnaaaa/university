@@ -6,18 +6,9 @@ namespace LR1
 {
     internal class PointIndexConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is Point2D point)
-            {
-                return $"p{point.Index + 1}";
-            }
-            return string.Empty;
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+            value is Point2D point ? $"p{point.Index + 1}" : string.Empty;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

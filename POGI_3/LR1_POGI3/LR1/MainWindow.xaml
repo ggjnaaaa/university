@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LR1"
         mc:Ignorable="d"
         Title="Лабораторная работа 1. Анастасия Г." Height="550" Width="800"
-        MinHeight="500" MinWidth="800"
+        MinHeight="550" MinWidth="800"
         FontFamily="Arial" FontSize="18">
     <Window.Resources>
         <Style TargetType="Button">
@@ -23,8 +23,9 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Canvas x:Name="backgroundCanvas" Background="Black" Margin="34, 180, 262, 84" IsEnabled="false"/>
-        <Canvas x:Name="drawerCanvas" Background="#FFEAEAEA" ClipToBounds="True" Margin="35, 181, 263, 85" Width="Auto" Height="Auto">
+        <!--Холст для вывода фигур-->
+        <Canvas Background="Black" Margin="34, 180, 262, 84" IsEnabled="false"/>
+        <Canvas Background="#FFEAEAEA" ClipToBounds="True" Margin="35, 181, 263, 85" Width="Auto" Height="Auto">
             <ItemsControl ItemsSource="{Binding Lines}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -40,33 +41,37 @@
             </ItemsControl>
         </Canvas>
 
-        <Button Command="{Binding squareClick}"
+        <!--Кнопки для создания фигур-->
+        <Button Command="{Binding SquareClick}"
                 Margin="0,0,35,85" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <TextBlock Text="Квадрат"/>
         </Button>
-        <Button Command="{Binding randomRectangleClick}"
+        <Button Command="{Binding RandomRectangleClick}"
                 Margin="0,0,35,155" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <TextBlock Text="Произвольный прямоугольник"/>
         </Button>
-        <Button Command="{Binding randomTriangleClick}"
+        <Button Command="{Binding RandomTriangleClick}"
                 Margin="0,0,35,225" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <TextBlock Text="Произвольный треугольник"/>
         </Button>
 
-        <TextBlock x:Name="shapeInfo" Text="{Binding SelectedShape.AllInfo, FallbackValue='Выберите фигуру чтобы увидеть всю информацию'}"
+        <!--Информация о выбранной фигуре-->
+        <TextBlock Text="{Binding SelectedShape.AllInfo, FallbackValue='Выберите фигуру чтобы увидеть всю информацию'}"
                    FontSize="16" TextAlignment="Left"
                    Height="120" Margin="35,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
 
-        <TextBlock Text="Cмещение по X:" Margin="0,0,74,439" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
-        <Slider x:Name="xSlider" HorizontalAlignment="Right" Margin="0,0,35,421" VerticalAlignment="Bottom" Width="180"
+        <!--Слайдеры-->
+        <TextBlock Text="Смещение по X:" Margin="0,0,74,439" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider HorizontalAlignment="Right" Margin="0,0,35,421" VerticalAlignment="Bottom" Width="180"
                 Value="{Binding XSlider}" Minimum="-500" Maximum="500"  IsEnabled="True"/>
-        <TextBlock Text="Cмещение по Y:" Margin="0,0,74,383" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
-        <Slider x:Name="ySlider" HorizontalAlignment="Right" Margin="0,0,35,365" Width="180" Height="18" VerticalAlignment="Bottom"
+        <TextBlock Text="Смещение по Y:" Margin="0,0,74,383" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
+        <Slider HorizontalAlignment="Right" Margin="0,0,35,365" Width="180" Height="18" VerticalAlignment="Bottom"
                 Value="{Binding YSlider}" Minimum="-500" Maximum="500"  IsEnabled="True"/>
         <TextBlock Text="Толщина линии:" Margin="0,0,74,318" HorizontalAlignment="Right" Width="141" Height="26" VerticalAlignment="Bottom"/>
-        <Slider x:Name="lineSlider" HorizontalAlignment="Right" Margin="0,0,35,295" Width="180" Height="18" VerticalAlignment="Bottom"
-        Value="{Binding LineSlider}" Minimum="1" Maximum="10" />
+        <Slider HorizontalAlignment="Right" Margin="0,0,35,295" Width="180" Height="18" VerticalAlignment="Bottom"
+                Value="{Binding LineSlider}" Minimum="1" Maximum="10" />
 
+        <!--Информация о точках выбранной фигуры-->
         <Grid Margin="34,0,34,19" Height="52" VerticalAlignment="Bottom" Background="Black"/>
         <Grid Margin="35,0,35,20" Height="50" VerticalAlignment="Bottom" Background="LightGray">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -84,8 +89,6 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-            
         </Grid>
-
     </Grid>
 </Window>

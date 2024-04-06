@@ -10,20 +10,14 @@ namespace LR1.shapes
     {
         public Triangle(Point2D p1, Point2D p2, Point2D p3) : base(new List<Point2D> { p1, p2, p3 }) { }
 
-        public override double getArea()
+        protected override string GetAllInfo()
         {
-            double p = getPerimeter() / 2.0;
-            return Math.Sqrt(p * (p - Lines[0].length()) *  (p - Lines[1].length()) * (p - Lines[2].length()));
-        }
-        public override double getPerimeter() => (Lines[0].length() + Lines[1].length() + Lines[2].length());
-        protected override string getAllInfo()
-        {
-            object[] result = new object[] { Points[0].X, Points[0].Y,
+            var result = new object[] { Points[0].X, Points[0].Y,
                                             Points[1].X, Points[1].Y,
                                             Points[2].X, Points[2].Y,
-                                            getArea(), getPerimeter()};
+                                            GetArea(), GetPerimeter()};
 
-            for (int i = 0; i < 8; i++)
+            for (var i = 0; i < 8; i++)
                 result[i] = Math.Round((double)result[i], 2);
 
             return string.Format("Координаты точек: \n({0},{1}), ({2},{3}), ({4},{5}) \nПлощадь: {6} \nПериметр: {7}", result);

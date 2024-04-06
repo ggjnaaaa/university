@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace LR1
 {
@@ -12,19 +11,19 @@ namespace LR1
         /// Рисование (также обновление) фигуры.
         /// </summary>
         /// <param name="shape">Фигура которую нужно нарисовать (обновить)</param>
-        public void drawShape(Shape shape)
+        public void DrawShape(Shape shape)
         {
-            List<DecoratedLine> lines = shape.Lines;
-            List<Point2D> points = shape.Points;
-            if (lines.Count() <= 0)
+            var lines = shape.Lines;
+            var points = shape.Points;
+            if (!lines.Any())
             {
-                for (int i = 0; i < points.Count - 1; i++) shape.Lines.Add(drawLine(shape, points[i], points[i + 1]));
-                shape.Lines.Add(drawLine(shape, points[points.Count - 1], points[0]));
+                for (var i = 0; i < points.Count - 1; i++) shape.Lines.Add(DrawLine(shape, points[i], points[i + 1]));
+                shape.Lines.Add(DrawLine(shape, points[points.Count - 1], points[0]));
             }
             else
             {
-                for (int i = 0; i < points.Count - 1; i++) lines[i].updatePoints(points[i], points[i + 1]);
-                lines[points.Count - 1].updatePoints(points[points.Count - 1], points[0]);
+                for (var i = 0; i < points.Count - 1; i++) lines[i].UpdatePoints(points[i], points[i + 1]);
+                lines[points.Count - 1].UpdatePoints(points[points.Count - 1], points[0]);
             }
         }
 
@@ -35,10 +34,10 @@ namespace LR1
         /// <param name="from">Начальная точка</param>
         /// <param name="to">Конечная точка</param>
         /// <returns>Возвращает готовую линию.</returns>
-        private DecoratedLine drawLine(Shape shape, Point2D from, Point2D to)
+        private static DecoratedLine DrawLine(Shape shape, Point2D from, Point2D to)
         {
-            DecoratedLine line = new DecoratedLine(shape, from, to);
-            line.LineClicked += shape.shapeClicked;
+            var line = new DecoratedLine(shape, from, to);
+            line.LineClick += shape.ShapeClicked;
             return line;
         }
     }

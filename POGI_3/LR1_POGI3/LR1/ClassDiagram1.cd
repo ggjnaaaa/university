@@ -1,67 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="LR1.ShapesCreator">
-    <Position X="10" Y="0.75" Width="1.5" />
+    <Position X="10" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAABAAgAAAAAAAIAAAAAEAgAAAAAAAAAAgQAIAAAE=</HashCode>
+      <HashCode>BAAAAAAAABAAAIAAAAAgAAAAAAAIAAAAAgAAAAEAAAE=</HashCode>
       <FileName>ShapesCreator.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="LR1.Shape">
-    <Position X="5.75" Y="1.5" Width="1.5" />
+    <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAIgAAAIAAAAAAAgQAACAICAEgAkCgAABA=</HashCode>
+      <HashCode>AAAACAAAAEAIgAIAIAAAAEAAgAAAAAECKEgAkAAAAAA=</HashCode>
       <FileName>Shape.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LR1.Point2D">
-    <Position X="7.5" Y="2.75" Width="1.5" />
+    <Position X="7.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAQAQQAAIAAAAAAAgAAAAAAAAAEAIAgAYAA=</HashCode>
+      <HashCode>AAAAAABIAAQAAAAAIAAAAAAEgAAAAAAADAEAAAAAYAA=</HashCode>
       <FileName>Point2D.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LR1.Drawer">
-    <Position X="5.75" Y="6.5" Width="1.5" />
+    <Position X="5.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIEAAAAAAAAA=</HashCode>
       <FileName>Drawer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LR1.shapes.Triangle">
     <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>shapes\Triangle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LR1.shapes.Rectangle">
-    <Position X="3.75" Y="0.5" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>shapes\Rectangle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LR1.DecoratedLine">
-    <Position X="3.75" Y="2.5" Width="1.5" />
+    <Position X="4" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAABgAAAQEIAABAAAAAAAACBAAQAAAABAAA=</HashCode>
+      <HashCode>AAAAAAAEIAABggAAAIAAABBAAAAAAACBAAAAAAABAAA=</HashCode>
       <FileName>DecoratedLine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LR1.MainWindowViewModel">
-    <Position X="11.75" Y="0.75" Width="1.5" />
+    <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAEADIAAAQAAQgAAiABACQIQAEAEAABA=</HashCode>
+      <HashCode>AAAABAAAARAgAEADIAAAQAAAkBBCEAACAIAAAAEAAAA=</HashCode>
       <FileName>MainWindowViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LR1.PointIndexConverter">
-    <Position X="11.75" Y="6.5" Width="1.5" />
+    <Position X="11.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PointIndexConverter.cs</FileName>
@@ -69,7 +68,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LR1.RelayCommand">
-    <Position X="10" Y="4.5" Width="1.5" />
+    <Position X="10" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RelayCommand.cs</FileName>
