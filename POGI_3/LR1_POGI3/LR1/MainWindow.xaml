@@ -24,22 +24,23 @@
     </Window.DataContext>
     <Grid>
         <!--Холст для вывода фигур-->
-        <Canvas Background="Black" Margin="34, 180, 262, 84" IsEnabled="false"/>
-        <Canvas Background="#FFEAEAEA" ClipToBounds="True" Margin="35, 181, 263, 85" Width="Auto" Height="Auto">
-            <ItemsControl ItemsSource="{Binding Lines}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}"
-                  Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Canvas>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="{Binding ShapeCreator.CanvasMargins}">
+            <Canvas Background="#FFEAEAEA" ClipToBounds="True" Width="Auto" Height="Auto">
+                <ItemsControl ItemsSource="{Binding Lines}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <!--<ItemsControl.ItemTemplate>
+                        <DataTemplate>-->
+                            <!--<Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}"
+                      Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"/>-->
+                        <!--</DataTemplate>
+                    </ItemsControl.ItemTemplate>-->
+                </ItemsControl>
+            </Canvas>
+        </Border>
 
         <!--Кнопки для создания фигур-->
         <Button Command="{Binding SquareClick}"
@@ -72,23 +73,24 @@
                 Value="{Binding LineSlider}" Minimum="1" Maximum="10" />
 
         <!--Информация о точках выбранной фигуры-->
-        <Grid Margin="34,0,34,19" Height="52" VerticalAlignment="Bottom" Background="Black"/>
-        <Grid Margin="35,0,35,20" Height="50" VerticalAlignment="Bottom" Background="LightGray">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding SelectedShape.Points}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Converter={StaticResource PointIndexConverter}}" />
-                                <TextBlock Text=": x = " />
-                                <TextBox Text="{Binding X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                                <TextBlock Text=" y = " />
-                                <TextBox Text="{Binding Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="35,0,35,20" Height="50" VerticalAlignment="Bottom">
+            <Grid Background="LightGray">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding SelectedShape.Points}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Converter={StaticResource PointIndexConverter}}" />
+                                    <TextBlock Text=": x = " />
+                                    <TextBox Text="{Binding X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                    <TextBlock Text=" y = " />
+                                    <TextBox Text="{Binding Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

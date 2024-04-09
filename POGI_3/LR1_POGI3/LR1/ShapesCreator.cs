@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using LR1.shapes;
 
@@ -7,14 +9,33 @@ namespace LR1
     /// <summary>
     /// Класс для создания фигур
     /// </summary>
-    internal class ShapesCreator
+    internal class ShapesCreator : INotifyPropertyChanged
     {
-        private static readonly Random _random = new Random();
+        private readonly Random _random;
+
+        private Thickness _canvasMargins;
+
+        public Thickness CanvasMargins
+        {
+            get => _canvasMargins;
+            set
+            {
+                _canvasMargins = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ShapesCreator()
+        {
+            _random = new Random();
+
+            CanvasMargins = new Thickness(35, 181, 263, 85);
+        }
         /// <summary>
         /// Создаёт треугольник по рандомным точкам.
         /// </summary>
         /// <returns>Возвращает созданный треугольник.</returns>
-        public static Shape CreateTriangle()
+        public Shape CreateTriangle()
         {
             var p1 = GenerateRandomPoint(0);
             var p2 = GenerateRandomPoint(1);
@@ -37,7 +58,7 @@ namespace LR1
         /// Создаёт прямоугольник по рандомным точкам.
         /// </summary>
         /// <returns>Возвращает созданный прямоугольник.</returns>
-        public static Shape CreateRectangle()
+        public Shape CreateRectangle()
         {
             var p1 = GenerateRandomPoint(0);
             var p2 = new Point2D(GenerateNextRandomNumber(250), p1.Y, 1);
@@ -52,7 +73,7 @@ namespace LR1
         /// Создаёт квадрат по рандомным точкам.
         /// </summary>
         /// <returns>Возвращает созданный квадрат</returns>
-        public static Shape CreateSquare()
+        public Shape CreateSquare()
         {
             var size = GenerateNextRandomNumber(MaxHorizontalPointValue() / 2);
 
@@ -69,9 +90,12 @@ namespace LR1
         /// Генерирует рандомную точку.
         /// </summary>
         /// <returns>Возвращает созданную точку</returns>
-        private static Point2D GenerateRandomPoint(int index) => new Point2D(GenerateNextRandomNumber(MaxHorizontalPointValue()), GenerateNextRandomNumber(MaxVerticalPointValue()), index);
-        private static double GenerateNextRandomNumber(double maxValue) => (_random.NextDouble() + _random.Next((int)maxValue));
-        private static double MaxVerticalPointValue() => Application.Current.MainWindow.Height - 181 - 85;
-        private static double MaxHorizontalPointValue() => Application.Current.MainWindow.Width - 263 - 35;
+        private Point2D GenerateRandomPoint(int index) => new Point2D(GenerateNextRandomNumber(MaxHorizontalPointValue()), GenerateNextRandomNumber(MaxVerticalPointValue()), index);
+        private double GenerateNextRandomNumber(double maxValue) => (_random.NextDouble() + _random.Next((int)maxValue));
+        private double MaxVerticalPointValue() => Application.Current.MainWindow.Height - CanvasMargins.Top - CanvasMargins.Bottom;
+        private double MaxHorizontalPointValue() => Application.Current.MainWindow.Width - CanvasMargins.Left - CanvasMargins.Right;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

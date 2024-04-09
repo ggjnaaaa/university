@@ -12,6 +12,16 @@ namespace LR1
     /// </summary>
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
+        private ShapesCreator _shapeCreator;
+        public ShapesCreator ShapeCreator
+        {
+            get => _shapeCreator;
+            set
+            {
+                _shapeCreator = value;
+                OnPropertyChanged();
+            }
+        }
         // Свойства (и переменные к ним) для биндинга оконных элементов
         public ObservableCollection<Line> Lines { get; set; }
         private Shape _selectedShape;
@@ -88,11 +98,12 @@ namespace LR1
         // Конструктор
         public MainWindowViewModel()
         {
+            ShapeCreator = new ShapesCreator();
             Lines = new ObservableCollection<Line>();
 
-            RandomTriangleClick = new RelayCommand(param => AddLines(SubscribeShape(ShapesCreator.CreateTriangle())));
-            RandomRectangleClick = new RelayCommand(param => AddLines(SubscribeShape(ShapesCreator.CreateRectangle())));
-            SquareClick = new RelayCommand(param => AddLines(SubscribeShape(ShapesCreator.CreateSquare())));
+            RandomTriangleClick = new RelayCommand(param => AddLines(SubscribeShape(ShapeCreator.CreateTriangle())));
+            RandomRectangleClick = new RelayCommand(param => AddLines(SubscribeShape(ShapeCreator.CreateRectangle())));
+            SquareClick = new RelayCommand(param => AddLines(SubscribeShape(ShapeCreator.CreateSquare())));
 
             ResetSliders(0, 0, 3);
         }
