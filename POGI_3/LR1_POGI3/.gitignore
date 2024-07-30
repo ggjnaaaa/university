@@ -1,0 +1,129 @@
+﻿# Временные файлы Visual Studio
+.vs/
+.vscode/
+*.vscode/*
+*.vs/*
+
+# Стандартные каталоги сборки
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]emp/
+
+# Автоматически создаваемые файлы проекта
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Файлы конфигурации сборки
+*.build
+*.cache
+*.csproj.user
+*.dbmdl
+*.jfm
+*.pdb
+
+# Логи и трассировки
+*.log
+*.tlog
+*.wrn
+*.csv
+*.trx
+*.userprefs
+
+# Пакеты NuGet
+*.nupkg
+*.snupkg
+# Папка для кэша NuGet
+.nuget/
+# Файл с информацией о пакете
+project.lock.json
+project.fragment.lock.json
+# Файл со списком загруженных пакетов
+packages.config
+# Папка для загруженных пакетов
+packages/
+# Папка для глобальных пакетов NuGet
+global-packages/
+
+# Конфигурационные файлы Visual Studio Code
+.vscode/
+
+# Файлы временного управления
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+
+# Файлы сборки и отладки
+*.dll
+*.exe
+*.dir
+*.order
+*.projdata
+*.session
+*.tlog
+
+# Шрифты и другие ресурсы
+*.ttf
+*.woff
+
+# Локальные файлы среды
+.localhistory
+.history
+.recommenders
+.testsettings
+
+# Папка для временных файлов
+*.pidb
+*.tmp
+*.temp
+*.DMP
+*.orig
+*.idb
+*.ipch
+*.dir
+*.log
+*.sbr
+*.lastbuildstate
+
+# Сертификаты
+*.cer
+*.pfx
+*.p12
+*.snk
+
+# Файлы публикации ClickOnce
+publish/
+*.ClickOnce/
+
+# Папка для результатов тестирования
+TestResults/
+
+# Стандартные исключения для систем
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Дополнительные исключения для проектов на C#
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Исключения для Rider IDE
+.idea/
+*.sln.iml
+
+# Исключения для Windows Forms и WPF
+**/app.config
+**/web.config
+**/packages.config
+**/packages/
