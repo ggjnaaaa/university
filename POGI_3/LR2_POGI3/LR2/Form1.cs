@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LR2
@@ -10,6 +11,8 @@ namespace LR2
     {
         private string dataFolderPath = "GalleryImages";
         private Queue<string> _imageQueue;
+        
+        private const int MAXFILELENGTH = 2 * 1024 * 1024;
 
         public Form1()
         {
@@ -44,11 +47,6 @@ namespace LR2
             AddPhotoBtn.FlatAppearance.BorderColor = Color.FromArgb(110, 110, 110);
             ChangeShapeBtn.FlatAppearance.BorderColor = Color.FromArgb(110, 110, 110);
 
-            AddPhotoBtn.Invalidate();
-            AddPhotoBtn.Update();
-            ChangeShapeBtn.Invalidate();
-            ChangeShapeBtn.Update();
-
             // Цвет окна
             this.BackColor = Color.FromArgb(46, 46, 46);
         }
@@ -77,7 +75,13 @@ namespace LR2
             if (Directory.Exists(dataFolderPath))
             {
                 // Заполнение очереди фотографий
-                foreach (var imagePath in Directory.GetFiles(dataFolderPath))
+                foreach (var imagePath in Directory.GetFiles(dataFolderPath)
+                                                                   .Where(file => (file.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                                                                                  file.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
+                                                                                  file.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+                                                                                  file.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
+                                                                                  file.EndsWith(".gif", StringComparison.OrdinalIgnoreCase)) && file.Length <= MAXFILELENGTH)
+                                                                   .ToArray())
                 {
                     try
                     {
@@ -127,7 +131,7 @@ namespace LR2
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
-            openFileDialog.Filter = "Изображения (*.jpg, *.jpeg, *.png, *.gif, *.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Все файлы (*.*)|*.*";
+            openFileDialog.Filter = "Изображения (*.jpg, *.jpeg, *.png, *.gif, *.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {

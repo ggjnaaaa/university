@@ -1,0 +1,51 @@
+﻿<Window x:Class="WorkerCard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WorkerCard"
+        xmlns:custom="clr-namespace:WpfCustomControlLibrary;assembly=WpfCustomControlLibrary"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="700"
+        ResizeMode="NoResize"
+        Background="#222222">
+    <Window.DataContext>
+        <local:WorkerCardVM/>
+    </Window.DataContext>
+    <Grid>
+        <custom:StarterMenu Visibility="{Binding StarterMenu_Visibility}" Name="StarterMenu_Element"
+                            RegisterCommand="{Binding StarterMenu_RegisterCommand}"
+                            LogInCommand="{Binding StarterMenu_LogInCommand}"/>
+
+        <custom:LogIn Visibility="{Binding LogIn_Visibility}" Name="LogIn_Element"
+                      Login="{Binding Nickname, Mode=TwoWay}"
+                      Password="{Binding Password, Mode=TwoWay}"
+                      LoginCommand="{Binding LogIn_LogInCommand}"
+                      CancelCommand="{Binding BackToStarterMenuCommand}"/>
+
+        <custom:Register Visibility="{Binding Register_Visibility}" Name="SignUp_Element"
+                         CancelCommand="{Binding BackToStarterMenuCommand}"
+                         RegisterCommand="{Binding Register_RegisterCommand}"
+                         Login="{Binding Nickname, Mode=TwoWay}"
+                         Password="{Binding Password, Mode=TwoWay}"/>
+
+        <custom:UserCard Visibility="{Binding UserCard_Visibility}" Name="UserCard_Element"
+                         Nickname="{Binding Nickname}"
+                         RealName="{Binding RealName}"
+                         Department="{Binding Department}"
+                         Position="{Binding Position}"
+                         Image="{Binding Image}"
+                         CancelCommand="{Binding UserCard_SignOutCommand}"
+                         UpdateCommand="{Binding UserCard_UpdateCommand}"/>
+
+        <custom:UpdateCard Visibility="{Binding UpdateCard_Visibility}" Name="UpdateCard_Element"
+                           Nickname="{Binding Nickname, Mode=TwoWay}"
+                           RealName="{Binding RealName, Mode=TwoWay}"
+                           Department="{Binding Department, Mode=TwoWay}"
+                           Position="{Binding Position, Mode=TwoWay}"
+                           Image="{Binding Image}"
+                           SaveCommand="{Binding UpdateCard_SaveCommand}"
+                           CancelCommand="{Binding BackToUserCardCommand}"
+                           ImageCommand="{Binding UpdateCard_UpdateImage}"/>
+    </Grid>
+</Window>

@@ -107,7 +107,7 @@ namespace LR2
             base.OnMouseLeave(e);
             UpPanel();
         }
-        
+
         /// <summary>
         /// Асинхронно поднимает панель для текста.
         /// </summary>
@@ -129,9 +129,9 @@ namespace LR2
                 // Обновление положения кнопки
                 var reductionByX = REDUCINGBUTTON / ANIMATIONSPEED;
                 var reductionByY = REDUCINGBUTTON / ANIMATIONSPEED;
-                Width -= reductionByX;
-                Height -= reductionByY;
-                Location = new Point(Convert.ToInt32(Location.X + reductionByX / 2 ) , Convert.ToInt32(Location.Y + reductionByY / 2 ));
+                Width += reductionByX;
+                Height += reductionByY;
+                Location = new Point(Convert.ToInt32(Location.X - reductionByX / 2), Convert.ToInt32(Location.Y - reductionByY / 2));
             }
         }
 
@@ -156,9 +156,9 @@ namespace LR2
                 // Обновление положения кнопки
                 var reductionByX = REDUCINGBUTTON / ANIMATIONSPEED;
                 var reductionByY = REDUCINGBUTTON / ANIMATIONSPEED;
-                Width += reductionByX;
-                Height += reductionByY;
-                Location = new Point(Convert.ToInt32(Location.X - reductionByX / 2 ), Convert.ToInt32(Location.Y - reductionByY / 2 ));
+                Width -= reductionByX;
+                Height -= reductionByY;
+                Location = new Point(Convert.ToInt32(Location.X + reductionByX / 2), Convert.ToInt32(Location.Y + reductionByY / 2));
             }
         }
 

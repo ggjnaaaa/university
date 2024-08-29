@@ -6,9 +6,6 @@ namespace LR2
 {
     internal class EllipseHoverButton : HoverButton
     {
-        /// <summary>
-        /// Создаёт новую кнопку.
-        /// </summary>
         public EllipseHoverButton() : base() { }
 
         /// <summary>

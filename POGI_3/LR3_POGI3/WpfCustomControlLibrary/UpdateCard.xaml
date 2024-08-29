@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="WpfCustomControlLibrary.UpdateCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfCustomControlLibrary"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="0" Grid.Row="0"
+                Name="CancelButton"
+                Content="Назад" ToolTip="Вернуться в карточку сотрудника"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=CancelCommand}"
+                HorizontalAlignment="Left"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="Фотография:"/>
+        <Image Grid.Row="1" Grid.Column="0" 
+               Margin="30"
+               Name="EmployeeImage"
+               ToolTip="Изменить фото"
+               MouseLeftButtonDown="EmployeeImage_Click"/>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      Margin="0,0,0,40">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Имя пользователя:" />
+                <TextBox Name="NicknameTextBox" ToolTip="Введите имя пользователя"
+                         TextChanged="NicknameChanged"/>
+
+                <TextBlock Text="Имя:" />
+                <TextBox Name="RealNameTextBox" ToolTip="Введите имя"
+                         TextChanged="RealNameChanged"/>
+
+                <TextBlock Text="Отдел:" />
+                <TextBox Name="DepartmentTextBox" ToolTip="Введите отдел"
+                         TextChanged="DepartmentChanged"/>
+
+                <TextBlock Text="Должность:" />
+                <TextBox Name="PositionTextBox" ToolTip="Введите должность"
+                         TextChanged="PositionChanged"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.ColumnSpan="2"
+                Grid.Row="2"
+                Name="SaveButton" Content="Сохранить" ToolTip="Сохранить данные"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SaveCommand}"/>
+    </Grid>
+</UserControl>
